@@ -1,97 +1,123 @@
 import React from "react";
+import {
+  FaCheckCircle,
+  FaGavel,
+  FaInfoCircle,
+  FaShippingFast,
+  FaUndo,
+  FaShieldAlt,
+  FaCopyright,
+  FaExclamationTriangle,
+  FaEnvelope,
+} from "react-icons/fa";
 
 const Terms = ({
-  companyName = "Your Toy Store",
-  contactEmail = "support@yourtoystore.com",
-  effectiveDate = "October 25, 2025",
+  companyName = "ToyTopia",
+  contactEmail = "support@toytopia.com",
+  effectiveDate = "January 01, 2025",
 }) => {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-xl p-8">
-        <h1 className="text-3xl font-bold mb-4">Terms and Conditions</h1>
-        <p className="text-sm text-gray-500 mb-6">
-          Effective date: <span className="font-medium">{effectiveDate}</span>
-        </p>
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 py-14 px-5">
+      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-10 border border-gray-200">
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">1. Acceptance of Terms</h2>
-          <p className="text-gray-700 leading-relaxed">
-            By accessing or using the {companyName} website, you agree to these Terms and Conditions and our Privacy Policy. If you do not agree, you must not use our services.
+        {/* HEADER */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text">
+            Terms & Conditions
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Effective Date: <span className="font-semibold">{effectiveDate}</span>
           </p>
-        </section>
+        </div>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">2. Use of Website</h2>
-          <p className="text-gray-700 leading-relaxed">
-            You agree to use our website only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else’s use of the website.
-          </p>
-        </section>
+        {/* SECTIONS */}
+        <Section
+          icon={<FaCheckCircle className="text-purple-600 text-2xl" />}
+          title="1. Acceptance of Terms"
+          content={`${companyName} provides services to you subject to these Terms. By accessing or using our website, you agree to comply with and be bound by these Terms. If you do not agree, you must discontinue using the platform.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">3. Product Information</h2>
-          <p className="text-gray-700 leading-relaxed">
-            We make every effort to ensure product details, pricing, and availability are accurate. However, errors or omissions may occur. We reserve the right to correct them and to refuse orders where necessary.
-          </p>
-        </section>
+        <Section
+          icon={<FaInfoCircle className="text-blue-600 text-2xl" />}
+          title="2. Use of Website"
+          content={`You agree to use our website responsibly and lawfully. You must not engage in activities that may harm, disrupt, or interfere with our services or the experience of other users.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">4. Purchases and Payments</h2>
-          <p className="text-gray-700 leading-relaxed">
-            All purchases are subject to availability and confirmation of the order price. Payment must be made through our authorized payment gateways. We do not store full card numbers on our servers.
-          </p>
-        </section>
+        <Section
+          icon={<FaCheckCircle className="text-green-600 text-2xl" />}
+          title="3. Product Information"
+          content={`We strive to ensure that all product details, pricing, and availability are accurate. However, mistakes may occur. ${companyName} reserves the right to correct errors and cancel orders affected by inaccuracies.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">5. Shipping and Delivery</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Delivery times are estimates and not guaranteed. {companyName} is not responsible for delays caused by carriers, weather, or unforeseen events.
-          </p>
-        </section>
+        <Section
+          icon={<FaShieldAlt className="text-indigo-600 text-2xl" />}
+          title="4. Purchases & Payments"
+          content={`All orders are subject to availability and price confirmation. Payments must be completed via approved methods. Sensitive payment data is not stored on our servers.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">6. Returns and Refunds</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Please refer to our Returns Policy for details. Returns and refunds are handled in accordance with the policy in place at the time of purchase.
-          </p>
-        </section>
+        <Section
+          icon={<FaShippingFast className="text-yellow-600 text-2xl" />}
+          title="5. Shipping & Delivery"
+          content={`${companyName} aims to deliver all products on time, but delays may occur due to external factors such as carrier issues or weather conditions. Delivery dates are estimates, not guarantees.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">7. Intellectual Property</h2>
-          <p className="text-gray-700 leading-relaxed">
-            All content on this website, including text, images, graphics, logos, and software, is the property of {companyName} or its licensors and is protected by copyright and other intellectual property laws.
-          </p>
-        </section>
+        <Section
+          icon={<FaUndo className="text-pink-600 text-2xl" />}
+          title="6. Returns & Refunds"
+          content={`Returns and refunds follow the guidelines detailed in our Return Policy. Eligibility for refunds depends on product condition, return time frame, and proof of purchase.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">8. Limitation of Liability</h2>
-          <p className="text-gray-700 leading-relaxed">
-            {companyName} shall not be liable for any direct, indirect, incidental, or consequential damages arising out of or in connection with your use of the website or products purchased.
-          </p>
-        </section>
+        <Section
+          icon={<FaCopyright className="text-red-600 text-2xl" />}
+          title="7. Intellectual Property"
+          content={`All content on this website—including images, descriptions, graphics, trademarks, and branding—is the exclusive property of ${companyName} and protected by copyright laws. Unauthorized use is prohibited.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">9. Governing Law</h2>
-          <p className="text-gray-700 leading-relaxed">
-            These terms are governed by the laws of the country where {companyName} operates. Disputes shall be resolved in the appropriate courts of that jurisdiction.
-          </p>
-        </section>
+        <Section
+          icon={<FaExclamationTriangle className="text-orange-500 text-2xl" />}
+          title="8. Limitation of Liability"
+          content={`${companyName} is not liable for damages resulting from misuse of the website, delays, incorrect product information, or third-party issues. Your use of our platform is at your own risk.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">10. Contact Us</h2>
-          <p className="text-gray-700 leading-relaxed">
-            If you have any questions or concerns regarding these Terms, please contact us at:
-          </p>
-          <p className="mt-2 font-medium">
-            {companyName} — <a className="text-blue-600" href={`mailto:${contactEmail}`}>{contactEmail}</a>
-          </p>
-        </section>
+        <Section
+          icon={<FaGavel className="text-purple-700 text-2xl" />}
+          title="9. Governing Law"
+          content={`These Terms are governed by the laws of the country where ${companyName} operates. Any disputes will be resolved exclusively in local courts.`}
+        />
 
-        <p className="text-xs text-gray-400 mt-6">
-          Note: This document is for informational purposes and does not constitute legal advice. Consult a qualified attorney to ensure compliance with local laws.
+        <Section
+          icon={<FaEnvelope className="text-green-600 text-2xl" />}
+          title="10. Contact Information"
+          content={
+            <p className="text-gray-700">
+              Questions about these Terms? Contact us at:{" "}
+              <a href={`mailto:${contactEmail}`} className="text-blue-600 underline">
+                {contactEmail}
+              </a>
+            </p>
+          }
+        />
+
+        {/* FOOTNOTE */}
+        <p className="text-xs text-gray-400 mt-10 text-center">
+          This document is informational and not legal advice. Consult an attorney to ensure compliance with local laws.
         </p>
       </div>
     </div>
   );
 };
+
+const Section = ({ icon, title, content }) => (
+  <div className="mb-10">
+    <div className="flex items-center gap-3 mb-3">
+      {icon}
+      <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+    </div>
+
+    <div className="pl-9 text-gray-700 leading-relaxed">{content}</div>
+
+    <hr className="mt-6 border-gray-200" />
+  </div>
+);
 
 export default Terms;

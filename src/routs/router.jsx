@@ -10,9 +10,10 @@ import Profile from "../pages/Profile";
 import ErrorPage from "../pages/ErrorPage";
 import ToyDetail from "../pages/ToyDetail";
 import ProtectedRoute from "../context/ProtectedRouter";
-import Offer from "../pages/Offer";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import Terms from "../pages/Terms";
+import MyPurchases from "../pages/MyPurchases";
+import Contact from "../pages/Contact";
 
 
 const router = createBrowserRouter([
@@ -28,12 +29,16 @@ const router = createBrowserRouter([
             element : <MapToys></MapToys>
             },
            {
-            path :"offer",
-            element :<ProtectedRoute><Offer></Offer></ProtectedRoute>
+            path :"mypurchases",
+            element :<ProtectedRoute><MyPurchases></MyPurchases></ProtectedRoute>
             },
            {
             path :"privacy",
             element :<PrivacyPolicy></PrivacyPolicy>
+            },
+           {
+            path :"contact",
+            element :<Contact></Contact>
             },
            {
             path :"terms",

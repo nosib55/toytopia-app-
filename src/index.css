@@ -19,7 +19,7 @@ a.nav-link.active {
   transform: scale(1.08);
 
   /* Animated underline */
-  text-decoration: underline;
+ 
   text-decoration-color: #9F62F2;
   text-underline-offset: 4px;
 }

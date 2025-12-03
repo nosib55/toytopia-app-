@@ -28,7 +28,9 @@ const Navbar = () => {
 
         {/* LOGO */}
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-white"><img src="/logo.gif" className="w-30" alt="" /></span>
+          <span className="text-xl font-bold text-white">
+            <img src="/logo.gif" className="w-30" alt="" />
+          </span>
         </Link>
 
         {/* DESKTOP NAV LINKS */}
@@ -41,9 +43,15 @@ const Navbar = () => {
             All Toys
           </NavLink>
 
-          <NavLink to="/offer" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
-            Offer
-          </NavLink>
+          {/* ONLY SHOW WHEN USER IS LOGGED IN */}
+          {user && (
+            <NavLink
+              to="/mypurchases"
+              className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+            >
+              My Purchases
+            </NavLink>
+          )}
 
           <NavLink to="/blog" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
             Blog
@@ -67,14 +75,12 @@ const Navbar = () => {
                 Login
               </Link>
 
-             <Link
-  to="/singup"
-  className="px-4 py-2 border border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold rounded-md shadow-md hover:opacity-90 transition"
-  onClick={() => setMobileOpen(false)}
->
-  Sign Up
-</Link>
-
+              <Link
+                to="/singup"
+                className="px-4 py-2 border border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold rounded-md shadow-md transition"
+              >
+                Sign Up
+              </Link>
             </>
           ) : (
             <div className="relative" ref={dropdownRef}>
@@ -89,7 +95,6 @@ const Navbar = () => {
               {/* CLICK DROPDOWN */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 bg-white shadow-xl rounded-lg w-44 p-3 z-50">
-
                   <p className="text-sm font-semibold text-slate-700">
                     {user.displayName || "User"}
                   </p>
@@ -115,7 +120,6 @@ const Navbar = () => {
                   >
                     Logout
                   </button>
-
                 </div>
               )}
             </div>
@@ -148,11 +152,16 @@ const Navbar = () => {
             All Toys
           </NavLink>
 
-          <NavLink to="/offer" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
-            onClick={() => setMobileOpen(false)}
-          >
-            My Offer
-          </NavLink>
+          {/* ONLY SHOW WHEN LOGGED IN (MOBILE) */}
+          {user && (
+            <NavLink
+              to="/mypurchases"
+              className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+              onClick={() => setMobileOpen(false)}
+            >
+              My Purchases
+            </NavLink>
+          )}
 
           <NavLink to="/blog" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
             onClick={() => setMobileOpen(false)}
@@ -178,13 +187,12 @@ const Navbar = () => {
               </Link>
 
               <Link
-  to="/singup"
-  className="px-4 py-2 border border-primary-400 bg-green-500 text-gray-900 rounded-md text-center"
-  onClick={() => setMobileOpen(false)}
->
-  Sign Up
-</Link>
-
+                to="/singup"
+                className="px-4 py-2 border border-primary-400 bg-green-500 text-gray-900 rounded-md text-center"
+                onClick={() => setMobileOpen(false)}
+              >
+                Sign Up
+              </Link>
             </>
           ) : (
             <>

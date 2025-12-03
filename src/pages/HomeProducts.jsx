@@ -2,6 +2,7 @@ import useToysData from "../hooks/useToysData";
 import AllToys from "../components/AllToys";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
+import { Link } from "react-router";
 
 const HomeProducts = () => {
   const { toys, loading, error } = useToysData();
@@ -18,6 +19,11 @@ const HomeProducts = () => {
         {homeToys.map(toy => (
           <AllToys key={toy._id} toy={toy} />
         ))}
+      </div>
+      <div>
+        <Link to="/toys" className="mt-6  px-6 py-3 w-max bg-pink-500 text-white font-semibold rounded-md hover:bg-pink-600 transition text-center flex items-center mx-auto ">
+          View All Toys
+        </Link>
       </div>
     </div>
   );

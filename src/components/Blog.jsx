@@ -2,82 +2,89 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div className="max-w-5xl mx-auto px-4 md:px-8 py-12">
+    <div className="max-w-6xl mx-auto px-4 md:px-8 py-14">
+
       {/* Header */}
-      <h1 className="text-4xl font-extrabold text-center mb-10 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 text-transparent bg-clip-text">
-        Welcome to the ToyTopia Blog 🎠
-      </h1>
+      <div className="text-center space-y-4 mb-16">
+        <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-transparent bg-clip-text">
+          ToyTopia Blog
+        </h1>
 
-      {/* Intro */}
-      <p className="text-center text-gray-700 text-lg mb-12">
-        ToyTopia is a local kids’ toy store platform — a fun and creative space 
-        where families can discover, explore, and support local toy sellers. 
-        Our mission is to make finding quality, imaginative toys easy and enjoyable 
-        for every parent and child.
-      </p>
+        <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          Explore stories, ideas, and insights from the world of toys.  
+          ToyTopia connects families with fun, creativity, and local toy makers.
+        </p>
+      </div>
 
-      <div className="space-y-10">
+      {/* BLOG SECTIONS */}
+      <div className="space-y-12">
+        
         {/* Section 1 */}
-        <div className="bg-white shadow-lg p-6 rounded-2xl border-l-4 border-purple-400 hover:shadow-2xl transition-all">
-          <h2 className="text-2xl font-bold text-purple-600 mb-3">
+        <div className="group bg-white shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all rounded-2xl border border-purple-200 p-8">
+          <h2 className="text-2xl font-bold text-purple-600 mb-4 flex items-center gap-2">
             🌈 Our Mission
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            At ToyTopia, we believe that every child deserves access to safe, 
-            creative, and high-quality toys. Our mission is to connect families 
-            with local toy makers and shops, helping small businesses grow while 
-            inspiring endless fun for children.
+            ToyTopia was created to support local toy sellers and bring families
+            closer to high-quality, creative, and safe products. We believe every
+            child should have access to toys that inspire imagination and joy.
+            Our mission is to make discovering great toys easier — while helping
+            small toy businesses grow.
           </p>
         </div>
 
         {/* Section 2 */}
-        <div className="bg-white shadow-lg p-6 rounded-2xl border-l-4 border-pink-400 hover:shadow-2xl transition-all">
-          <h2 className="text-2xl font-bold text-pink-600 mb-3">
+        <div className="group bg-white shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all rounded-2xl border border-pink-200 p-8">
+          <h2 className="text-2xl font-bold text-pink-600 mb-4 flex items-center gap-2">
             🧸 What You Can Do on ToyTopia
           </h2>
           <ul className="list-disc pl-6 text-gray-700 space-y-2">
-            <li>Browse a wide range of local toys by category and price.</li>
-            <li>View detailed information, images, and ratings for each toy.</li>
-            <li>Login or Register securely with Firebase Authentication.</li>
-            <li>Leave feedback and ratings for your favorite toys.</li>
-            <li>Access your personal profile to update name or photo.</li>
+            <li>Browse toys by category, price, or type.</li>
+            <li>See full details like rating, description, and availability.</li>
+            <li>Create an account and keep your profile updated.</li>
+            <li>Save your purchases and track your toy interests.</li>
+            <li>Support small toy makers in your local community.</li>
           </ul>
         </div>
 
         {/* Section 3 */}
-        <div className="bg-white shadow-lg p-6 rounded-2xl border-l-4 border-yellow-400 hover:shadow-2xl transition-all">
-          <h2 className="text-2xl font-bold text-yellow-600 mb-3">
+        <div className="group bg-white shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all rounded-2xl border border-yellow-200 p-8">
+          <h2 className="text-2xl font-bold text-yellow-600 mb-4 flex items-center gap-2">
             💻 How ToyTopia Works
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            ToyTopia is built as a modern single-page React application. 
-            It integrates Firebase for secure user authentication and uses 
-            dynamic routes to ensure a smooth user experience.  
-            JSON-based data is used to display toy details, and protected routes 
-            ensure privacy for logged-in users.
+            ToyTopia is a fully responsive React-based web application.  
+            Secure login is powered by Firebase Authentication. Dynamic routing
+            ensures smooth navigation, while MongoDB is used for toy storage 
+            and purchase tracking. Everything is built to deliver a seamless 
+            online shopping experience for families.
           </p>
         </div>
 
         {/* Section 4 */}
-        <div className="bg-white shadow-lg p-6 rounded-2xl border-l-4 border-indigo-400 hover:shadow-2xl transition-all">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-3">
+        <div className="group bg-white shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all rounded-2xl border border-indigo-200 p-8">
+          <h2 className="text-2xl font-bold text-indigo-600 mb-4 flex items-center gap-2">
             🚀 Future Plans
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            Our future goal is to expand ToyTopia into a full e-commerce platform 
-            where families can directly purchase toys online, track orders, and 
-            enjoy personalized toy recommendations based on their child’s interests.
+            We're working on expanding ToyTopia into a complete e-commerce
+            solution. Soon, users will be able to place orders, track delivery,
+            enjoy personalized toy suggestions, and access exclusive offers.  
+            Big features like reviews, coupons, seller dashboards, and more are
+            on the way.
           </p>
         </div>
+
       </div>
 
       {/* Footer */}
-      <div className="text-center mt-12">
+      <div className="text-center mt-14">
         <p className="text-gray-600">
-          💡 Stay tuned for more updates and stories from{" "}
-          <span className="font-semibold text-purple-600">ToyTopia!</span>
+          💡 Stay tuned for more updates from{" "}
+          <span className="font-bold text-purple-600">ToyTopia</span>!
         </p>
       </div>
+
     </div>
   );
 };

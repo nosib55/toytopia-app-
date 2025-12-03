@@ -1,118 +1,137 @@
 import React from "react";
+import { FaShieldAlt, FaUserShield, FaCookieBite, FaEnvelope } from "react-icons/fa";
 
 const PrivacyPolicy = ({
-  companyName = "Your Toy Store",
-  contactEmail = "support@yourtoystore.com",
-  effectiveDate = "October 25, 2025",
+  companyName = "ToyTopia",
+  contactEmail = "support@toytopia.com",
+  effectiveDate = "January 01, 2025",
 }) => {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-xl p-8">
-        <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-        <p className="text-sm text-gray-500 mb-6">
-          Effective date: <span className="font-medium">{effectiveDate}</span>
-        </p>
-
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">1. Introduction</h2>
-          <p className="text-gray-700 leading-relaxed">
-            {companyName} ("we", "us", or "our") respects your privacy and is committed
-            to protecting it through our compliance with this policy. This document
-            explains what information we collect, why we collect it, and how we use it.
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 py-14 px-5">
+      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-10 border border-gray-200">
+        
+        {/* Header */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 text-transparent bg-clip-text">
+            Privacy Policy
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Effective Date: <span className="font-semibold text-gray-700">{effectiveDate}</span>
           </p>
-        </section>
+        </div>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">2. Information We Collect</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            <li>Account information you provide (name, email, address, etc.).</li>
-            <li>Order and payment details when you make purchases (note: we do not store full card numbers on our servers).</li>
-            <li>Usage data such as pages visited, clicks, and browsing behavior on our site.</li>
-            <li>Device and technical information (IP address, browser type, device identifiers).</li>
-          </ul>
-        </section>
+        {/* Section Template */}
+        <Section
+          icon={<FaUserShield className="text-purple-600 text-2xl" />}
+          title="1. Introduction"
+          content={`${companyName} ("we", "our", "us") respects your privacy and is committed to protecting your personal information. This Privacy Policy outlines the types of information we collect, how we use it, and the steps we take to safeguard your data.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">3. How We Use Your Information</h2>
-          <p className="text-gray-700 leading-relaxed">
-            We use the information to:
-          </p>
-          <ul className="list-disc list-inside text-gray-700">
-            <li>Process and fulfill orders, and provide customer support.</li>
-            <li>Improve, personalize, and secure our website and services.</li>
-            <li>Send transactional messages, order confirmations, and important updates.</li>
-            <li>Send marketing emails if you opt in (you can unsubscribe at any time).</li>
-          </ul>
-        </section>
+        <Section
+          icon={<FaShieldAlt className="text-pink-600 text-2xl" />}
+          title="2. Information We Collect"
+          content={
+            <ul className="list-disc ml-6 space-y-1 text-gray-700">
+              <li>Personal details such as name, email, and delivery address.</li>
+              <li>Purchase history, payment details (no full card info stored).</li>
+              <li>Browsing behavior, device information, and interaction tracking.</li>
+              <li>Technical information such as IP address and browser type.</li>
+            </ul>
+          }
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">4. Cookies & Tracking</h2>
-          <p className="text-gray-700 leading-relaxed">
-            We use cookies and similar technologies to operate the website and analyze usage. You can control cookie preferences via your browser settings. Third-party services (analytics, advertising) may also place cookies; please check their privacy policies for details.
-          </p>
-        </section>
+        <Section
+          icon={<FaShieldAlt className="text-indigo-600 text-2xl" />}
+          title="3. How We Use Your Information"
+          content={
+            <ul className="list-disc ml-6 space-y-1 text-gray-700">
+              <li>To process orders and provide customer service.</li>
+              <li>To improve website functionality and user experience.</li>
+              <li>To send important updates or promotional content (optional).</li>
+              <li>To ensure security and fraud prevention.</li>
+            </ul>
+          }
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">5. Sharing & Third Parties</h2>
-          <p className="text-gray-700 leading-relaxed">
-            We may share your information with:
-          </p>
-          <ul className="list-disc list-inside text-gray-700">
-            <li>Payment processors and delivery partners to fulfill orders.</li>
-            <li>Service providers who support our business (analytics, email delivery, hosting).</li>
-            <li>When required by law or to protect our rights and users.</li>
-          </ul>
-        </section>
+        <Section
+          icon={<FaCookieBite className="text-yellow-500 text-2xl" />}
+          title="4. Cookies & Tracking Technologies"
+          content={`We use cookies and analytics tools to improve service quality, analyze usage, and personalize the browsing experience. You may disable cookies through your browser settings.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">6. Data Retention & Security</h2>
-          <p className="text-gray-700 leading-relaxed">
-            We retain personal information only as long as necessary for the purposes described. We implement reasonable security measures to protect your data, but no system is 100% secure—if a breach occurs we will notify affected users as required by law.
-          </p>
-        </section>
+        <Section
+          icon={<FaShieldAlt className="text-green-600 text-2xl" />}
+          title="5. Sharing Your Information"
+          content={
+            <ul className="list-disc ml-6 space-y-1 text-gray-700">
+              <li>Logistics and delivery partners.</li>
+              <li>Payment service providers.</li>
+              <li>Analytics platforms and website hosting providers.</li>
+              <li>Legal authorities if required by law.</li>
+            </ul>
+          }
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">7. Children’s Privacy</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Our services are not directed to children under 13 (or the minimum age under local law). We do not knowingly collect personal information from children. If you believe we have collected data from a child, please contact us and we will take steps to delete it.
-          </p>
-        </section>
+        <Section
+          icon={<FaUserShield className="text-blue-500 text-2xl" />}
+          title="6. Data Security & Retention"
+          content={`We store personal data only for as long as necessary. We use modern security practices to safeguard your information; however, no system is completely secure. In case of a security incident, we will notify affected users promptly.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">8. Your Rights</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Depending on your jurisdiction, you may have rights including access, correction, deletion, and portability of your personal data. To exercise these rights, contact us at the email below.
-          </p>
-        </section>
+        <Section
+          icon={<FaUserShield className="text-red-500 text-2xl" />}
+          title="7. Children's Privacy"
+          content={`Our services are not intended for children under the age of 13. We do not knowingly collect personal data from minors. If you believe a child has provided information, please contact us immediately.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">9. International Transfers</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Your information may be transferred to and processed in countries other than your own. We will take appropriate steps to ensure your data is treated securely and in accordance with this policy.
-          </p>
-        </section>
+        <Section
+          icon={<FaShieldAlt className="text-purple-500 text-2xl" />}
+          title="8. Your Rights"
+          content={`Depending on your region, you may request to access, correct, delete, or restrict your data. Reach out to us via email to exercise these rights.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">10. Changes to This Policy</h2>
-          <p className="text-gray-700 leading-relaxed">
-            We may update this Privacy Policy from time to time. We will post the updated policy with an updated effective date.
-          </p>
-        </section>
+        <Section
+          icon={<FaShieldAlt className="text-pink-500 text-2xl" />}
+          title="9. International Data Transfers"
+          content={`Your data may be transferred to locations outside your country. We take steps to ensure data protections meet legal requirements.`}
+        />
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">11. Contact Us</h2>
-          <p className="text-gray-700 leading-relaxed">
-            If you have questions or requests about this policy, contact us at:
-          </p>
-          <p className="mt-2 font-medium">{companyName} — <a className="text-blue-600" href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
-        </section>
+        <Section
+          icon={<FaShieldAlt className="text-indigo-500 text-2xl" />}
+          title="10. Updates to This Policy"
+          content={`We may periodically update this Privacy Policy. Any changes will be reflected on this page with an updated effective date.`}
+        />
 
-        <p className="text-xs text-gray-400 mt-6">
-          Note: This policy is provided for informational purposes and does not constitute legal advice. We recommend consulting a qualified attorney to adapt this policy to your jurisdiction and business needs.
+        <Section
+          icon={<FaEnvelope className="text-green-600 text-2xl" />}
+          title="11. Contact Us"
+          content={
+            <p className="text-gray-700">
+              For questions or requests, email us at:{" "}
+              <a href={`mailto:${contactEmail}`} className="text-blue-600 underline">
+                {contactEmail}
+              </a>
+            </p>
+          }
+        />
+
+        <p className="text-xs text-gray-400 mt-10 text-center">
+          This policy is for informational purposes only and is not legal advice.
         </p>
       </div>
     </div>
   );
 };
+
+const Section = ({ icon, title, content }) => (
+  <div className="mb-10">
+    <div className="flex items-center gap-3 mb-3">
+      {icon}
+      <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+    </div>
+    <div className="pl-9 text-gray-700 leading-relaxed">{content}</div>
+    <hr className="mt-6 border-gray-200" />
+  </div>
+);
 
 export default PrivacyPolicy;

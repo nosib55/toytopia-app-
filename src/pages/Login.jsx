@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { auth } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
@@ -16,38 +16,50 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [showResetModal, setShowResetModal] = useState(false);
-  const navigate = useNavigate();
 
-  // ✅ Email/Password Login
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // 🔥 If redirected from protected page → go back there
+  const from = location.state?.from || "/";
+
+  // ====================================================
+  // Email/Password Login
+  // ====================================================
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     signInWithEmailAndPasswordFunc(email, password)
-      .then((res) => {
+      .then(() => {
         toast.success("Login successful!");
-        navigate("/");
+        navigate(from, { replace: true }); // 👈 fixed redirect
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
 
-  // ✅ Google Login
+  // ====================================================
+  // Google Login
+  // ====================================================
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
+
     signInWithPopup(auth, provider)
-      .then((res) => {
+      .then(() => {
         toast.success("Google Sign-In successful!");
-        navigate("/");
+        navigate(from, { replace: true }); // 👈 fixed redirect
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
 
-  // ✅ Reset Password
+  // ====================================================
+  // Reset Password
+  // ====================================================
   const handleResetPassword = (e) => {
     e.preventDefault();
 
@@ -58,18 +70,17 @@ const Login = () => {
 
     sendPasswordResetEmail(auth, resetEmail)
       .then(() => {
-        toast.success("Password reset email sent! Check your inbox.");
+        toast.success("Password reset email sent!");
         setShowResetModal(false);
         setResetEmail("");
       })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+      .catch((error) => toast.error(error.message));
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-base-200">
       <div className="card bg-base-100 w-full max-w-sm shadow-2xl p-5">
+
         <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
 
         <div className="card-body">
@@ -112,7 +123,7 @@ const Login = () => {
               </span>
             </div>
 
-            {/* Login */}
+            {/* Login Button */}
             <button
               type="submit"
               className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow mt-4 w-full"
@@ -130,7 +141,7 @@ const Login = () => {
               <span>Continue with Google</span>
             </button>
 
-            {/* Sign Up */}
+            {/* Sign Up Link */}
             <p className="text-center text-sm mt-4">
               Don’t have an account?{" "}
               <Link
@@ -144,23 +155,23 @@ const Login = () => {
         </div>
       </div>
 
-      {/* ✅ Password Reset Modal */}
+      {/* Reset Modal */}
       {showResetModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-80">
-            <h3 className="text-lg font-semibold text-center mb-3">
-              Reset Password
-            </h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg w-80 shadow-xl">
+            <h3 className="text-lg font-semibold text-center">Reset Password</h3>
+
             <form onSubmit={handleResetPassword}>
               <input
                 type="email"
+                className="input input-bordered w-full mt-3"
                 placeholder="Enter your email"
-                className="input input-bordered w-full mb-3"
                 value={resetEmail}
                 onChange={(e) => setResetEmail(e.target.value)}
                 required
               />
-              <div className="flex justify-end gap-2">
+
+              <div className="flex justify-end gap-2 mt-4">
                 <button
                   type="button"
                   onClick={() => setShowResetModal(false)}
@@ -168,9 +179,7 @@ const Login = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-sm btn-primary">
-                  Send Email
-                </button>
+                <button className="btn btn-primary btn-sm">Send Email</button>
               </div>
             </form>
           </div>
