@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             },
            {
             path :"offer",
-            element :<Offer></Offer>
+            element :<ProtectedRoute><Offer></Offer></ProtectedRoute>
             },
            {
             path :"privacy",
@@ -62,13 +62,14 @@ const router = createBrowserRouter([
              element:<ProtectedRoute><ToyDetail></ToyDetail>
              </ProtectedRoute> 
            },
-          
-    ]
-    },
-      {
+           {
              path : "*",
            element :<ErrorPage></ErrorPage>
             },
+          
+    ]
+    },
+      
    
 ])
 export default router ;
