@@ -4,51 +4,50 @@ import { Link } from "react-router-dom";
 const AllToys = ({ toy }) => {
   const {
     toyName,
-    toyId,
     toyPrice,
     rating,
     pictureURL,
+    _id    // MongoDB ID
   } = toy;
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm 
-                    hover:shadow-xl transition-all duration-300 
-                    overflow-hidden w-full h-30]">
-
-      {/* FULL DARAZ STYLE IMAGE */}
-      <div className="w-full overflow-hidden">
+    <div
+      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm 
+                 hover:shadow-xl transition-all duration-300 
+                 overflow-hidden w-full"
+    >
+      {/* IMAGE (Daraz Style Full Fit) */}
+      <div className="w-full h-40 sm:h-48 md:h-52 lg:h-56 overflow-hidden flex justify-center items-center bg-gray-100">
         <img
           src={pictureURL}
           alt={toyName}
-          className="w-full p-4 h-50 object-cover" 
+          className="h-full w-full object-cover"
         />
       </div>
 
       {/* CONTENT */}
-      <div className="p-3">
+      <div className="p-3 space-y-1.5">
 
-        {/* 2-LINE TITLE */}
-        <h3 className="text-sm font-semibold text-slate-900 dark:text-white 
-                      line-clamp-2 leading-tight">
+        {/* TITLE (Clamp 2) */}
+        <h3
+          className="text-sm font-semibold text-slate-900 dark:text-white 
+                     line-clamp-2"
+        >
           {toyName}
         </h3>
 
         {/* PRICE */}
-        <p className="text-[#f85606] text-lg font-bold mt-1">
-          ৳{toyPrice}
-        </p>
+        <p className="text-[#f85606] text-lg font-bold">${toyPrice}</p>
 
         {/* RATING */}
-        <p className="text-yellow-500 text-sm">
-          ⭐ {rating}
-        </p>
+        <p className="text-yellow-500 text-sm">⭐ {rating}</p>
 
-        {/* BUTTON */}
+        {/* VIEW BUTTON */}
         <Link
-          to={`/toys/${toyId}`}
-          className="block text-center mt-2 py-1.5 text-sm 
-                     bg-pink-500 hover:bg-pink-600 text-white font-semibold
-                     rounded-md transition"
+          to={`/toys/${_id}`}
+          className="block mt-2 py-1.5 text-sm text-center
+                     bg-pink-500 hover:bg-pink-600 text-white 
+                     font-semibold rounded-md transition"
         >
           View More
         </Link>

@@ -13,7 +13,7 @@ const Footer = () => {
               </span>
               <div className="flex flex-col leading-tight">
                 <span className="text-lg font-bold tracking-wide">
-                  ToyTopia
+                 <img src="/logo.gif" alt="" />
                 </span>
                 <span className="text-[11px] text-slate-300">
                   Thoughtfully curated toys for modern families.

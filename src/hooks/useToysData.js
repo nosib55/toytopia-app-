@@ -8,9 +8,12 @@ const useToysData = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("/Toys.json") 
-      .then(data =>setToys(data.data)).catch(err => setError(err))
-        .finally(() => setLoading(false));
+
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/toys`)
+      .then((res) => setToys(res.data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
   }, []);
 
   return { toys, loading, error };
