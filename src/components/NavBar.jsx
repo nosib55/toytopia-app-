@@ -24,12 +24,11 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur shadow-md">
-      <nav className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
 
         {/* LOGO */}
         <Link to="/" className="flex items-center gap-2">
-          <img src="/assets/logo.png" className="h-10 w-10" alt="Logo" />
-          <span className="text-xl font-bold text-white">ToyTopia</span>
+          <span className="text-xl font-bold text-white"><img src="/logo.gif" className="w-30" alt="" /></span>
         </Link>
 
         {/* DESKTOP NAV LINKS */}
@@ -68,12 +67,14 @@ const Navbar = () => {
                 Login
               </Link>
 
-              <Link
-                to="/singup"
-                className="px-4 py-1.5 border border-primary-400 text-primary-300 rounded-full text-sm hover:bg-primary-400/20"
-              >
-                Sign Up
-              </Link>
+             <Link
+  to="/singup"
+  className="px-4 py-2 border border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold rounded-md shadow-md hover:opacity-90 transition"
+  onClick={() => setMobileOpen(false)}
+>
+  Sign Up
+</Link>
+
             </>
           ) : (
             <div className="relative" ref={dropdownRef}>
@@ -177,12 +178,13 @@ const Navbar = () => {
               </Link>
 
               <Link
-                to="/singup"
-                className="px-4 py-2 border border-primary-400 text-primary-300 rounded-md text-center"
-                onClick={() => setMobileOpen(false)}
-              >
-                Sign Up
-              </Link>
+  to="/singup"
+  className="px-4 py-2 border border-primary-400 bg-green-500 text-gray-900 rounded-md text-center"
+  onClick={() => setMobileOpen(false)}
+>
+  Sign Up
+</Link>
+
             </>
           ) : (
             <>

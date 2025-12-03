@@ -10,7 +10,7 @@ const MapToys = () => {
   if (error) return <p className="text-center text-red-500">Error: {error.message}</p>;
 console.log(toys);
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 gap-6 p-6">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
       {toys.map((toy) => (
         <AllToys key={toy.toyId} toy={toy} />
       ))}

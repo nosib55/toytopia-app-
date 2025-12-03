@@ -1,26 +1,58 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const AllToys = ({ toy }) => {
-  const {toyName,toyId,toyPrice,subCategory,rating,availableQuantity}=toy;
+  const {
+    toyName,
+    toyId,
+    toyPrice,
+    rating,
+    pictureURL,
+  } = toy;
+
   return (
-    <div className="border rounded-xl p-4 shadow-md hover:shadow-lg transition bg-white">
-      <img
-        src={toy?.pictureURL}
-        alt={toy?.toyName}
-        className="w-full h-60 object-cover p-3 rounded-lg"
-      />
-      <h2 className="text-xl font-semibold mt-3">{toyName}</h2>
-      <p className="text-gray-600">Price: {toyPrice}</p>
-      <p className="text-sm text-gray-500 mt-1">Category: {subCategory}</p>
-      <p className="text-sm text-gray-500 mt-1">{rating}⭐</p>
-      <p className="text-sm text-gray-500 mt-1">Available: {availableQuantity}</p>
-      <button
-       
-        className="bg-purple-600 text-white mt-2 font-serif text-sm px-2 py-2 rounded-lg shadow-md hover:bg-purple-700 transition duration-300"
-      >
-        <Link to={`/toys/${toyId}`}>VIEW MORE</Link>
-      </button>
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm 
+                    hover:shadow-xl transition-all duration-300 
+                    overflow-hidden w-full h-30]">
+
+      {/* FULL DARAZ STYLE IMAGE */}
+      <div className="w-full overflow-hidden">
+        <img
+          src={pictureURL}
+          alt={toyName}
+          className="w-full p-4 h-50 object-cover" 
+        />
+      </div>
+
+      {/* CONTENT */}
+      <div className="p-3">
+
+        {/* 2-LINE TITLE */}
+        <h3 className="text-sm font-semibold text-slate-900 dark:text-white 
+                      line-clamp-2 leading-tight">
+          {toyName}
+        </h3>
+
+        {/* PRICE */}
+        <p className="text-[#f85606] text-lg font-bold mt-1">
+          ৳{toyPrice}
+        </p>
+
+        {/* RATING */}
+        <p className="text-yellow-500 text-sm">
+          ⭐ {rating}
+        </p>
+
+        {/* BUTTON */}
+        <Link
+          to={`/toys/${toyId}`}
+          className="block text-center mt-2 py-1.5 text-sm 
+                     bg-pink-500 hover:bg-pink-600 text-white font-semibold
+                     rounded-md transition"
+        >
+          View More
+        </Link>
+      </div>
     </div>
   );
 };
