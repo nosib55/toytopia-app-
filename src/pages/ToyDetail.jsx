@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import useToysData from "../hooks/useToysData";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
@@ -19,9 +19,7 @@ const ToyDetail = () => {
       const foundToy = toys.find((t) => t._id === toyId);
       setToy(foundToy || null);
 
-      if (foundToy) {
-        setQuantity(foundToy.availableQuantity);
-      }
+      if (foundToy) setQuantity(foundToy.availableQuantity);
     }
   }, [toys, toyId]);
 
@@ -29,7 +27,7 @@ const ToyDetail = () => {
 
   if (!toy) {
     return (
-      <div className="text-center mt-20 text-gray-600 text-lg">
+      <div className="text-center mt-20 text-base-content text-lg">
         ❌ Toy not found for ID: {toyId}
       </div>
     );
@@ -44,9 +42,6 @@ const ToyDetail = () => {
     subCategory,
   } = toy;
 
-  // ======================================
-  // ⭐ CONFIRM PURCHASE FIXED VERSION
-  // ======================================
   const handleConfirmPurchase = async () => {
     if (!user?.email) {
       toast.error("Please login to purchase ❌");
@@ -61,14 +56,13 @@ const ToyDetail = () => {
     const updatedQuantity = quantity - 1;
 
     try {
-      // 1️⃣ SAVE PURCHASE TO DB
       const purchase = {
         toyId,
         toyName,
         toyPrice,
         pictureURL,
         category: subCategory,
-        email: user.email,     // ✔ FIXED !!
+        email: user.email,
         quantity: 1,
         date: new Date(),
       };
@@ -79,14 +73,12 @@ const ToyDetail = () => {
         body: JSON.stringify(purchase),
       });
 
-      // 2️⃣ UPDATE STOCK
       await fetch(`http://localhost:5000/toys/${toyId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ availableQuantity: updatedQuantity }),
       });
 
-      // 3️⃣ UPDATE UI
       setQuantity(updatedQuantity);
 
       toast.success("Purchase Successful 🎉");
@@ -98,27 +90,39 @@ const ToyDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-blue-50 py-10">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen bg-base-200 py-10 text-base-content">
 
-        {/* Toy Detail Section */}
+      {/* Back Button */}
+      <div className="max-w-4xl mx-auto mb-6">
+        <Link
+          to="/toys"
+          className="px-6 py-2 bg-base-300 text-base-content rounded-md hover:bg-base-400 transition"
+        >
+          ⬅ Back
+        </Link>
+      </div>
+
+      {/* Main Container */}
+      <div className="max-w-4xl mx-auto bg-base-100 rounded-xl shadow-lg p-8 border border-base-300">
+
+        {/* Toy Section */}
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <img
             src={pictureURL}
             alt={toyName}
-            className="w-full md:w-80 h-80 object-cover rounded-lg border"
+            className="w-full md:w-80 h-80 object-cover rounded-lg border border-base-300"
           />
 
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-gray-800">{toyName}</h1>
+            <h1 className="text-3xl font-bold text-base-content">{toyName}</h1>
 
             <div className="divider my-4"></div>
 
-            <div className="flex flex-wrap gap-6 text-gray-700">
-              <p>💰 Price: ${toyPrice}</p>
-              <p>⭐ Rating: {rating}</p>
-              <p>📦 Quantity: {quantity}</p>
-              <p>🧩 Category: {subCategory}</p>
+            <div className="flex flex-wrap gap-6 text-base-content">
+              <p>💰 Price: <strong>${toyPrice}</strong></p>
+              <p>⭐ Rating: <strong>{rating}</strong></p>
+              <p>📦 Quantity: <strong>{quantity}</strong></p>
+              <p>🧩 Category: <strong>{subCategory}</strong></p>
             </div>
 
             <button
@@ -132,36 +136,38 @@ const ToyDetail = () => {
 
         <div className="divider my-8"></div>
 
-        <p className="text-gray-600 leading-relaxed">{fullDescription}</p>
+        <p className="text-base-content leading-relaxed">
+          {fullDescription}
+        </p>
       </div>
 
       {/* Purchase Modal */}
       {openModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 px-4">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-xl">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
+          <div className="bg-base-100 p-6 rounded-lg w-full max-w-md shadow-xl border border-base-300">
+            <h2 className="text-xl font-semibold text-base-content text-center mb-4">
+              Confirm Purchase
+            </h2>
 
-            <h2 className="text-xl font-semibold text-center mb-4">Confirm Purchase</h2>
-
-            <p><strong>Product:</strong> {toyName}</p>
-            <p><strong>Price:</strong> ${toyPrice}</p>
-            <p><strong>Available:</strong> {quantity}</p>
+            <p className="text-base-content"><strong>Product:</strong> {toyName}</p>
+            <p className="text-base-content"><strong>Price:</strong> ${toyPrice}</p>
+            <p className="text-base-content"><strong>Available:</strong> {quantity}</p>
 
             <div className="flex justify-between mt-6">
               <button
                 onClick={() => setOpenModal(false)}
-                className="btn bg-gray-300 hover:bg-gray-400 text-black"
+                className="btn bg-base-300 text-base-content hover:bg-base-400"
               >
                 Cancel
               </button>
 
               <button
                 onClick={handleConfirmPurchase}
-                className="btn bg-pink-500 hover:bg-pink-600 text-white"
+                className="btn bg-pink-500 text-white hover:bg-pink-600"
               >
                 Confirm
               </button>
             </div>
-
           </div>
         </div>
       )}

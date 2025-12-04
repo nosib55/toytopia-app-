@@ -53,10 +53,11 @@ const AllToys = () => {
     setFilteredToys(updated);
   }, [searchText, category, toys]);
 
-  if (loading) return <Loading></Loading>;
-  if (error) return <ErrorPage></ErrorPage>;
+  if (loading) return <Loading />;
+  if (error) return <ErrorPage />;
+
   return (
-    <div className="w-full px-4 py-6">
+    <div className="w-full px-4 py-6 text-base-content">
 
       {/* Search + Category */}
       <div className="flex flex-col md:flex-row gap-4 mb-6 md:justify-between">
@@ -65,14 +66,14 @@ const AllToys = () => {
         <input
           type="text"
           placeholder="Search toys..."
-          className="px-3 py-2 border rounded-md md:w-1/3"
+          className="px-3 py-2 border border-base-300 bg-base-100 text-base-content rounded-md md:w-1/3"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
 
         {/* Category */}
         <select
-          className="px-3 py-2 border rounded-md md:w-1/4"
+          className="px-3 py-2 border border-base-300 bg-base-100 text-base-content rounded-md md:w-1/4"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
@@ -93,20 +94,27 @@ const AllToys = () => {
           return (
             <div
               key={_id}
-              className="bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-xl transition-all"
+              className="bg-base-100 dark:bg-base-200 border border-base-300 
+                         rounded-lg shadow-sm hover:shadow-xl transition-all"
             >
               {/* IMAGE */}
-              <div className="w-full h-40 md:h-52 bg-gray-100 overflow-hidden flex justify-center items-center">
-                <img src={pictureURL} alt={toyName} className="w-full h-full object-cover" />
+              <div className="w-full h-40 md:h-52 bg-base-300 overflow-hidden flex justify-center items-center">
+                <img
+                  src={pictureURL}
+                  alt={toyName}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* CONTENT */}
               <div className="p-3 space-y-1.5">
-                <h3 className="text-sm font-semibold line-clamp-2">{toyName}</h3>
+                <h3 className="text-sm font-semibold line-clamp-2 text-base-content">
+                  {toyName}
+                </h3>
 
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <p className="text-[#f85606] text-lg font-bold">${toyPrice}</p>
-                  <p className="text-yellow-500 text-sm">⭐ {rating}</p>
+                  <p className="text-yellow-400 text-sm">⭐ {rating}</p>
                 </div>
 
                 <Link
@@ -123,12 +131,12 @@ const AllToys = () => {
 
       {/* BACK BUTTON */}
       <div className="mt-8 flex justify-center">
-        <button
-          onClick={() => navigate(-1)}
-          className="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800 transition"
+        <Link
+          to="/"
+          className="px-6 py-2 bg-base-200 dark:bg-base-300 text-base-content rounded-md hover:bg-base-300 hover:dark:bg-base-400 transition"
         >
           ⬅ Back
-        </button>
+        </Link>
       </div>
 
     </div>
