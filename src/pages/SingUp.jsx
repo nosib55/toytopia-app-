@@ -18,15 +18,15 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Redirect back to page where user came from
+  // 🟩 Redirect path setup
   const from = location.state?.from || "/";
 
   const passwordRule =
     /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
-  // ===============================  
-  // ⭐ Email & Password Signup  
-  // ===============================
+  // =====================================================
+  // ⭐ Email / Password Signup
+  // =====================================================
   const handleSignUp = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -38,7 +38,7 @@ const SignUp = () => {
 
     if (!passwordRule.test(password)) {
       toast.error(
-        "Password must contain: uppercase, lowercase, number, special symbol & minimum 6 characters."
+        "Password must contain uppercase, lowercase, number, special symbol & minimum 6 characters."
       );
       setLoading(false);
       return;
@@ -53,7 +53,7 @@ const SignUp = () => {
       .then(() => {
         toast.success("Account created successfully! 🎉");
 
-        // Redirect to previous protected page or home
+        // 🔥 Redirect to previous page
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -66,9 +66,9 @@ const SignUp = () => {
       .finally(() => setLoading(false));
   };
 
-  // ===============================  
-  // ⭐ Google Signup  
-  // ===============================
+  // =====================================================
+  // ⭐ Google Signup
+  // =====================================================
   const handleGoogleSignup = () => {
     const provider = new GoogleAuthProvider();
     setLoading(true);
@@ -76,7 +76,7 @@ const SignUp = () => {
     signInWithPopup(auth, provider)
       .then(() => {
         toast.success("Signup with Google successful!");
-        navigate(from, { replace: true });
+        navigate(from, { replace: true }); // redirect back
       })
       .catch((error) => toast.error(error.message))
       .finally(() => setLoading(false));
@@ -95,7 +95,6 @@ const SignUp = () => {
 
         <form onSubmit={handleSignUp} className="space-y-3">
 
-          {/* Name */}
           <div>
             <label className="label font-medium">Full Name</label>
             <input
@@ -107,7 +106,6 @@ const SignUp = () => {
             />
           </div>
 
-          {/* Photo URL */}
           <div>
             <label className="label font-medium">Photo URL</label>
             <input
@@ -119,7 +117,6 @@ const SignUp = () => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label className="label font-medium">Email</label>
             <input
@@ -131,7 +128,6 @@ const SignUp = () => {
             />
           </div>
 
-          {/* Password */}
           <div>
             <label className="label font-medium">Password</label>
             <div className="relative">
@@ -151,7 +147,6 @@ const SignUp = () => {
             </div>
           </div>
 
-          {/* Signup Button */}
           <button
             type="submit"
             disabled={loading}
@@ -165,10 +160,8 @@ const SignUp = () => {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="divider my-4">OR</div>
 
-        {/* Google Signup */}
         <button
           onClick={handleGoogleSignup}
           className="flex items-center justify-center gap-2 border border-gray-300 
@@ -177,7 +170,6 @@ const SignUp = () => {
           <FcGoogle size={22} /> Sign Up with Google
         </button>
 
-        {/* Login Link */}
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}
           <Link to="/login" className="text-blue-600 font-semibold hover:underline">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router";
 import useToysData from "../hooks/useToysData";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
@@ -9,16 +9,16 @@ const ToyDetail = () => {
   const { toyId } = useParams();
   const { toys, loading } = useToysData();
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [toy, setToy] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [quantity, setQuantity] = useState(null);
 
   useEffect(() => {
-    if (toys && toys.length > 0) {
+    if (toys.length > 0) {
       const foundToy = toys.find((t) => t._id === toyId);
       setToy(foundToy || null);
-
       if (foundToy) setQuantity(foundToy.availableQuantity);
     }
   }, [toys, toyId]);
@@ -28,32 +28,29 @@ const ToyDetail = () => {
   if (!toy) {
     return (
       <div className="text-center mt-20 text-base-content text-lg">
-        ❌ Toy not found for ID: {toyId}
+        ❌ Toy not found
       </div>
     );
   }
 
-  const {
-    toyName,
-    toyPrice,
-    rating,
-    fullDescription,
-    pictureURL,
-    subCategory,
-  } = toy;
+  const { toyName, toyPrice, rating, fullDescription, pictureURL, subCategory } =
+    toy;
 
   const API = import.meta.env.VITE_API_URL;
 
-  const handleConfirmPurchase = async () => {
+  // ------------------------
+  // BUY NOW HANDLER
+  // ------------------------
+  const handleBuyNow = () => {
     if (!user?.email) {
       toast.error("Please login to purchase ❌");
-      return;
+      return navigate("/login", { state: { from: `/toys/${toyId}` } });
     }
+    setOpenModal(true);
+  };
 
-    if (quantity <= 0) {
-      toast.error("Out of stock ❌");
-      return;
-    }
+  const handleConfirmPurchase = async () => {
+    if (quantity <= 0) return toast.error("Out of stock ❌");
 
     const updatedQuantity = quantity - 1;
 
@@ -82,7 +79,6 @@ const ToyDetail = () => {
       });
 
       setQuantity(updatedQuantity);
-
       toast.success("Purchase Successful 🎉");
     } catch (err) {
       toast.error("Server Error ❌");
@@ -111,11 +107,11 @@ const ToyDetail = () => {
           />
 
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-base-content">{toyName}</h1>
+            <h1 className="text-3xl font-bold">{toyName}</h1>
 
             <div className="divider my-4"></div>
 
-            <div className="flex flex-wrap gap-6 text-base-content">
+            <div className="flex flex-wrap gap-6">
               <p>💰 Price: <strong>${toyPrice}</strong></p>
               <p>⭐ Rating: <strong>{rating}</strong></p>
               <p>📦 Quantity: <strong>{quantity}</strong></p>
@@ -123,7 +119,7 @@ const ToyDetail = () => {
             </div>
 
             <button
-              onClick={() => setOpenModal(true)}
+              onClick={handleBuyNow}
               className="btn bg-pink-500 text-white hover:bg-pink-600 mt-6"
             >
               Buy Now
@@ -133,26 +129,25 @@ const ToyDetail = () => {
 
         <div className="divider my-8"></div>
 
-        <p className="text-base-content leading-relaxed">
-          {fullDescription}
-        </p>
+        <p>{fullDescription}</p>
       </div>
 
+      {/* PURCHASE MODAL */}
       {openModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
           <div className="bg-base-100 p-6 rounded-lg w-full max-w-md shadow-xl border border-base-300">
-            <h2 className="text-xl font-semibold text-base-content text-center mb-4">
+            <h2 className="text-xl font-semibold text-center mb-4">
               Confirm Purchase
             </h2>
 
-            <p className="text-base-content"><strong>Product:</strong> {toyName}</p>
-            <p className="text-base-content"><strong>Price:</strong> ${toyPrice}</p>
-            <p className="text-base-content"><strong>Available:</strong> {quantity}</p>
+            <p><strong>Product:</strong> {toyName}</p>
+            <p><strong>Price:</strong> ${toyPrice}</p>
+            <p><strong>Available:</strong> {quantity}</p>
 
             <div className="flex justify-between mt-6">
               <button
                 onClick={() => setOpenModal(false)}
-                className="btn bg-base-300 text-base-content hover:bg-base-400"
+                className="btn bg-base-300 hover:bg-base-400"
               >
                 Cancel
               </button>
@@ -167,6 +162,7 @@ const ToyDetail = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

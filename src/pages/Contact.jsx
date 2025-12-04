@@ -23,20 +23,23 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-5">
+    <div className="min-h-screen bg-base-200 py-12 px-5 text-base-content">
       <div className="max-w-4xl mx-auto">
+        
         <h1 className="text-3xl font-bold text-center mb-8">Contact Us</h1>
 
-        <div className="bg-white shadow-md rounded-xl p-8 grid md:grid-cols-2 gap-10">
+        {/* Card */}
+        <div className="bg-base-100 shadow-md rounded-xl p-8 grid md:grid-cols-2 gap-10 border border-base-300">
 
           {/* Contact Info */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Get In Touch</h2>
-            <p className="text-gray-700 mb-2">
+
+            <p className="opacity-80 mb-3">
               If you have questions, feedback, or partnership inquiries, feel free to reach out.
             </p>
 
-            <div className="mt-4 space-y-2 text-gray-800">
+            <div className="mt-4 space-y-2">
               <p><strong>Email:</strong> support@toytopia.com</p>
               <p><strong>Phone:</strong> +880 9696-560361</p>
               <p><strong>Location:</strong> Dhaka, Bangladesh</p>

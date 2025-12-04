@@ -64,8 +64,8 @@ const router = createBrowserRouter([
             {
              path:"/toys/:toyId",
 
-             element:<ProtectedRoute><ToyDetail></ToyDetail>
-             </ProtectedRoute> 
+             element:<ToyDetail></ToyDetail>
+              
            },
            {
              path : "*",

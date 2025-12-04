@@ -1,0 +1,74 @@
+[
+  {
+    "toyId": 1,
+    "toyName": "Lego Classic Bricks",
+    "sellerName": "Toys R Us Local",
+    "sellerEmail": "contact@toysruslocal.com",
+    "price": 49.99,
+    "rating": 4.7,
+    "availableQuantity": 75,
+    "description": "A timeless set of colorful Lego bricks that sparks creativity and imagination in children of all ages. Perfect for building endless structures, encouraging problem-solving, and developing fine motor skills. Hours of fun and learning await with each brick.",
+    "pictureURL": "https://i.ibb.co.com/KpnJxCR1/lego.webp",
+    "subCategory": "Building Blocks"
+  },
+  {
+    "toyId": 2,
+    "toyName": "Wooden Train Set",
+    "sellerName": "Local Train Toys",
+    "sellerEmail": "info@localtrain.com",
+    "price": 29.9,
+    "rating": 4.5,
+    "availableQuantity": 20,
+    "description": "Classic wooden train set for toddlers, designed to enhance coordination, creativity, and imaginative play. Durable and safe, this set includes multiple train pieces that can be arranged in countless ways, making playtime engaging and educational.",
+    "pictureURL": "https://i.ibb.co.com/TxfL0FyS/650822a28de68345d2636f6a-wooden-train-set-12-pcs-train-toys.jpg",
+    "subCategory": "Vehicles"
+  },
+  {
+    "toyId": 3,
+    "toyName": "Puzzle Adventure",
+    "sellerName": "Puzzle Corner",
+    "sellerEmail": "puzzle@corner.com",
+    "price": 14.5,
+    "rating": 4.2,
+    "availableQuantity": 40,
+    "description": "Brain-training puzzle set designed to challenge the mind and promote critical thinking. Ideal for children and adults alike, it helps improve concentration, problem-solving skills, and patience while providing hours of fun and engaging activities.",
+    "pictureURL": "https://i.ibb.co.com/fW9687p/11335269-9414428811252224.jpg",
+    "subCategory": "Puzzles"
+  },
+  {
+    "toyId": 4,
+    "toyName": "Plush Bear",
+    "sellerName": "Cuddles Store",
+    "sellerEmail": "hello@cuddles.com",
+    "price": 9.99,
+    "rating": 4.6,
+    "availableQuantity": 120,
+    "description": "Soft and huggable teddy bear that provides comfort and companionship to children of all ages. Perfect for bedtime snuggles, imaginative play, or as a gift to show love and care. Made from high-quality, safe materials for long-lasting enjoyment.",
+    "pictureURL": "https://i.ibb.co.com/HfNrvtY0/71-Sw-Hnxxf-L-AC-SL1500.jpg",
+    "subCategory": "Stuffed Animals"
+  },
+  {
+    "toyId": 5,
+    "toyName": "Art Kit for Kids",
+    "sellerName": "Creative Kids",
+    "sellerEmail": "creative@kids.com",
+    "price": 19.99,
+    "rating": 4.8,
+    "availableQuantity": 55,
+    "description": "Complete art kit with colors and brushes, designed to inspire creativity and artistic expression in children. Includes all necessary tools for drawing, painting, and crafting projects. Encourages imagination, fine motor skills, and hours of fun.",
+    "pictureURL": "https://i.ibb.co.com/W4xzLTWX/71-JMMH8m-DPL-AC-SL1000.jpg",
+    "subCategory": "Arts & Crafts"
+  },
+  {
+    "toyId": 6,
+    "toyName": "RC Mini Car",
+    "sellerName": "Speedy Toys",
+    "sellerEmail": "support@speedytoys.com",
+    "price": 34.99,
+    "rating": 4.4,
+    "availableQuantity": 10,
+    "description": "Remote control mini car for ages 6+, perfect for racing and outdoor fun. Features easy-to-use controls and durable design, providing an exciting experience for kids who love speed and adventure. Great for developing hand-eye coordination and motor skills.",
+    "pictureURL": "https://i.ibb.co.com/dJ3KxpKk/2334f93fd0d271c5be7102a8aa2e64e1-1750790304418.webp",
+    "subCategory": "Vehicles"
+  }
+]

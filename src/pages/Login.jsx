@@ -20,12 +20,10 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 🔥 If redirected from protected page → go back there
+  // 🟩 Get redirect path (default home)
   const from = location.state?.from || "/";
 
-  // ====================================================
-  // Email/Password Login
-  // ====================================================
+  // Email / Password Login
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -34,39 +32,28 @@ const Login = () => {
     signInWithEmailAndPasswordFunc(email, password)
       .then(() => {
         toast.success("Login successful!");
-        navigate(from, { replace: true }); // 👈 fixed redirect
+        navigate(from, { replace: true }); // 🔥 Go back to previous page
       })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+      .catch((error) => toast.error(error.message));
   };
 
-  // ====================================================
   // Google Login
-  // ====================================================
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
       .then(() => {
         toast.success("Google Sign-In successful!");
-        navigate(from, { replace: true }); // 👈 fixed redirect
+        navigate(from, { replace: true }); // 🔥 redirect back
       })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+      .catch((error) => toast.error(error.message));
   };
 
-  // ====================================================
   // Reset Password
-  // ====================================================
   const handleResetPassword = (e) => {
     e.preventDefault();
 
-    if (!resetEmail) {
-      toast.error("Please enter your email!");
-      return;
-    }
+    if (!resetEmail) return toast.error("Please enter your email!");
 
     sendPasswordResetEmail(auth, resetEmail)
       .then(() => {
@@ -85,7 +72,6 @@ const Login = () => {
 
         <div className="card-body">
           <form onSubmit={handleSignIn}>
-            {/* Email */}
             <label className="label">Email</label>
             <input
               type="email"
@@ -95,7 +81,6 @@ const Login = () => {
               required
             />
 
-            {/* Password */}
             <label className="label mt-3">Password</label>
             <div className="relative">
               <input
@@ -113,7 +98,6 @@ const Login = () => {
               </span>
             </div>
 
-            {/* Forgot Password */}
             <div className="text-right mt-2">
               <span
                 onClick={() => setShowResetModal(true)}
@@ -123,25 +107,24 @@ const Login = () => {
               </span>
             </div>
 
-            {/* Login Button */}
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow mt-4 w-full"
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 
+                         text-white font-semibold py-2 px-4 rounded-lg shadow mt-4 w-full"
             >
               Login
             </button>
 
-            {/* Google Sign-In */}
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="flex items-center justify-center gap-2 border border-gray-300 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg mt-3 w-full"
+              className="flex items-center justify-center gap-2 border border-gray-300 hover:bg-gray-100 
+                         text-gray-700 font-medium py-2 px-4 rounded-lg mt-3 w-full"
             >
               <FcGoogle size={22} />
               <span>Continue with Google</span>
             </button>
 
-            {/* Sign Up Link */}
             <p className="text-center text-sm mt-4">
               Don’t have an account?{" "}
               <Link
@@ -155,10 +138,10 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Reset Modal */}
+      {/* RESET MODAL */}
       {showResetModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-80 shadow-xl">
+          <div className="bg-base-100 p-6 rounded-lg w-80 shadow-xl">
             <h3 className="text-lg font-semibold text-center">Reset Password</h3>
 
             <form onSubmit={handleResetPassword}>
@@ -185,6 +168,7 @@ const Login = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };
