@@ -42,6 +42,8 @@ const ToyDetail = () => {
     subCategory,
   } = toy;
 
+  const API = import.meta.env.VITE_API_URL;
+
   const handleConfirmPurchase = async () => {
     if (!user?.email) {
       toast.error("Please login to purchase ❌");
@@ -67,13 +69,13 @@ const ToyDetail = () => {
         date: new Date(),
       };
 
-      await fetch("http://localhost:5000/purchases", {
+      await fetch(`${API}/purchases`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(purchase),
       });
 
-      await fetch(`http://localhost:5000/toys/${toyId}`, {
+      await fetch(`${API}/toys/${toyId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ availableQuantity: updatedQuantity }),
@@ -91,8 +93,6 @@ const ToyDetail = () => {
 
   return (
     <div className="min-h-screen bg-base-200 py-10 text-base-content">
-
-      {/* Back Button */}
       <div className="max-w-4xl mx-auto mb-6">
         <Link
           to="/toys"
@@ -102,10 +102,7 @@ const ToyDetail = () => {
         </Link>
       </div>
 
-      {/* Main Container */}
       <div className="max-w-4xl mx-auto bg-base-100 rounded-xl shadow-lg p-8 border border-base-300">
-
-        {/* Toy Section */}
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <img
             src={pictureURL}
@@ -141,7 +138,6 @@ const ToyDetail = () => {
         </p>
       </div>
 
-      {/* Purchase Modal */}
       {openModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
           <div className="bg-base-100 p-6 rounded-lg w-full max-w-md shadow-xl border border-base-300">

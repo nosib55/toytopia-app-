@@ -7,10 +7,12 @@ const MyPurchases = () => {
   const { user } = useContext(AuthContext);
   const [purchases, setPurchases] = useState([]);
 
+  const API = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/purchases?email=${user.email}`)
+    fetch(`${API}/purchases?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         const sorted = data.sort(
@@ -18,7 +20,7 @@ const MyPurchases = () => {
         );
         setPurchases(sorted);
       });
-  }, [user]);
+  }, [user, API]);
 
   // Delete confirmation
   const handleDelete = (id) => {
@@ -54,7 +56,7 @@ const MyPurchases = () => {
     toast.dismiss();
 
     try {
-      const res = await fetch(`http://localhost:5000/purchases/${id}`, {
+      const res = await fetch(`${API}/purchases/${id}`, {
         method: "DELETE",
       });
 
@@ -95,10 +97,7 @@ const MyPurchases = () => {
 
             <tbody>
               {purchases.map((item, index) => (
-                <tr
-                  key={item._id}
-                  className="hover:bg-base-300 transition"
-                >
+                <tr key={item._id} className="hover:bg-base-300 transition">
                   <td className="font-semibold">{index + 1}</td>
 
                   <td>
