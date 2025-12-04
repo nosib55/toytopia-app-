@@ -5,7 +5,7 @@ import AllToys from "../components/AllToys";
 import Blog from "../components/Blog";
 import Login from "../pages/Login";
 import SingUp from "../pages/SingUp";
-import MapToys from "../pages/MapToys";
+// import MapToys from "../pages/MapToys";
 import Profile from "../pages/Profile";
 import ErrorPage from "../pages/ErrorPage";
 import ToyDetail from "../pages/ToyDetail";
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             },
            {
             path :"toys",
-            element : <MapToys></MapToys>
+            element : <AllToys></AllToys>
             },
            {
             path :"mypurchases",

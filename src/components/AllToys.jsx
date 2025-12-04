@@ -1,57 +1,136 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import ErrorPage from "../pages/ErrorPage";
+import Loading from "../pages/Loading";
 
-const AllToys = ({ toy }) => {
-  const {
-    toyName,
-    toyPrice,
-    rating,
-    pictureURL,
-    _id    // MongoDB ID
-  } = toy;
+const AllToys = () => {
+  const [toys, setToys] = useState([]);
+  const [filteredToys, setFilteredToys] = useState([]);
 
+  const [categories, setCategories] = useState([]);
+
+  const [searchText, setSearchText] = useState("");
+  const [category, setCategory] = useState("all");
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
+  // Fetch toys
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/toys`)
+      .then((res) => {
+        setToys(res.data);
+        setFilteredToys(res.data);
+
+        // Unique subCategory list
+        const cats = [...new Set(res.data.map((t) => t.subCategory))];
+        setCategories(cats);
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Filtering logic (Search + Category)
+  useEffect(() => {
+    let updated = [...toys];
+
+    // Search
+    if (searchText.trim() !== "") {
+      updated = updated.filter((t) =>
+        t.toyName.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    // Category
+    if (category !== "all") {
+      updated = updated.filter((t) => t.subCategory === category);
+    }
+
+    setFilteredToys(updated);
+  }, [searchText, category, toys]);
+
+  if (loading) return <Loading></Loading>;
+  if (error) return <ErrorPage></ErrorPage>;
   return (
-    <div
-      className="bg-white dark:bg-slate-800 rounded-lg shadow-sm 
-                 hover:shadow-xl transition-all duration-300 
-                 overflow-hidden w-full"
-    >
-      {/* IMAGE (Daraz Style Full Fit) */}
-      <div className="w-full h-40 sm:h-48 md:h-52 lg:h-56 overflow-hidden flex justify-center items-center bg-gray-100">
-        <img
-          src={pictureURL}
-          alt={toyName}
-          className="h-full w-full object-cover"
+    <div className="w-full px-4 py-6">
+
+      {/* Search + Category */}
+      <div className="flex flex-col md:flex-row gap-4 mb-6 md:justify-between">
+
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search toys..."
+          className="px-3 py-2 border rounded-md md:w-1/3"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
         />
+
+        {/* Category */}
+        <select
+          className="px-3 py-2 border rounded-md md:w-1/4"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="all">All Categories</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* CONTENT */}
-      <div className="p-3 space-y-1.5">
+      {/* Toys Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {filteredToys.map((toy) => {
+          const { toyName, toyPrice, rating, pictureURL, _id } = toy;
 
-        {/* TITLE (Clamp 2) */}
-        <h3
-          className="text-sm font-semibold text-slate-900 dark:text-white 
-                     line-clamp-2"
-        >
-          {toyName}
-        </h3>
+          return (
+            <div
+              key={_id}
+              className="bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-xl transition-all"
+            >
+              {/* IMAGE */}
+              <div className="w-full h-40 md:h-52 bg-gray-100 overflow-hidden flex justify-center items-center">
+                <img src={pictureURL} alt={toyName} className="w-full h-full object-cover" />
+              </div>
 
-        {/* PRICE */}
-        <p className="text-[#f85606] text-lg font-bold">${toyPrice}</p>
+              {/* CONTENT */}
+              <div className="p-3 space-y-1.5">
+                <h3 className="text-sm font-semibold line-clamp-2">{toyName}</h3>
 
-        {/* RATING */}
-        <p className="text-yellow-500 text-sm">⭐ {rating}</p>
+                <div className="flex justify-between">
+                  <p className="text-[#f85606] text-lg font-bold">${toyPrice}</p>
+                  <p className="text-yellow-500 text-sm">⭐ {rating}</p>
+                </div>
 
-        {/* VIEW BUTTON */}
-        <Link
-          to={`/toys/${_id}`}
-          className="block mt-2 py-1.5 text-sm text-center
-                     bg-pink-500 hover:bg-pink-600 text-white 
-                     font-semibold rounded-md transition"
-        >
-          View More
-        </Link>
+                <Link
+                  to={`/toys/${_id}`}
+                  className="block mt-2 py-1.5 text-sm text-center bg-pink-500 hover:bg-pink-600 text-white rounded-md"
+                >
+                  View More
+                </Link>
+              </div>
+            </div>
+          );
+        })}
       </div>
+
+      {/* BACK BUTTON */}
+      <div className="mt-8 flex justify-center">
+        <button
+          onClick={() => navigate(-1)}
+          className="px-6 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800 transition"
+        >
+          ⬅ Back
+        </button>
+      </div>
+
     </div>
   );
 };

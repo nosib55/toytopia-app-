@@ -3,6 +3,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { FiMenu, FiX } from "react-icons/fi";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -35,6 +36,7 @@ const Navbar = () => {
 
         {/* DESKTOP NAV LINKS */}
         <div className="hidden md:flex items-center gap-5">
+          <ThemeToggle className="mr-4"></ThemeToggle>
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
             Home
           </NavLink>

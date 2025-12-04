@@ -7,17 +7,26 @@ const MyPurchases = () => {
   const { user } = useContext(AuthContext);
   const [purchases, setPurchases] = useState([]);
 
+  // ==============================
+  // Fetch purchases (Newest first)
+  // ==============================
   useEffect(() => {
     if (!user?.email) return;
 
     fetch(`http://localhost:5000/purchases?email=${user.email}`)
       .then((res) => res.json())
-      .then((data) => setPurchases(data));
+      .then((data) => {
+        // Sort latest → oldest
+        const sorted = data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        setPurchases(sorted);
+      });
   }, [user]);
 
-  // ===========================================
-  // CUSTOM DELETE CONFIRMATION USING TOAST
-  // ===========================================
+  // ==============================
+  // Delete confirmation toast
+  // ==============================
   const handleDelete = (id) => {
     toast.warn(
       <div>
@@ -46,11 +55,11 @@ const MyPurchases = () => {
     );
   };
 
-  // ===========================================
-  // CONFIRM DELETE FUNCTION
-  // ===========================================
+  // ==============================
+  // Confirm delete
+  // ==============================
   const confirmDelete = async (id) => {
-    toast.dismiss(); // Close confirm toast
+    toast.dismiss(); // Close popup
 
     try {
       const res = await fetch(`http://localhost:5000/purchases/${id}`, {
@@ -62,6 +71,7 @@ const MyPurchases = () => {
       if (result.deletedCount > 0) {
         toast.success("Purchase deleted!");
 
+        // Remove from UI
         setPurchases((prev) => prev.filter((item) => item._id !== id));
       } else {
         toast.error("Failed to delete!");
@@ -105,9 +115,7 @@ const MyPurchases = () => {
                     />
                   </td>
 
-                  <td className="font-semibold text-gray-700">
-                    {item.toyName}
-                  </td>
+                  <td className="font-semibold text-gray-700">{item.toyName}</td>
 
                   <td className="text-pink-600 font-bold">${item.toyPrice}</td>
 
